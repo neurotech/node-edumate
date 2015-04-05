@@ -14,9 +14,14 @@
     "url": "https://github.com/neurotech/node-edumate.git"
   },
   "keywords": [
-    "edumate"
+    "edumate",
+    "db2",
+    "jdbc"
   ],
-  "author": "Tim Douglas",
+  "author": {
+    "name": "Tim Douglas",
+    "email": "neurotech@gmail.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/neurotech/node-edumate/issues"
