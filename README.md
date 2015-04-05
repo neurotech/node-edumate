@@ -2,7 +2,7 @@
 
 Query your Edumate database with node.js
 
-*_Note:_ This is definitely an early work-in-progress!*
+*_Note:_ This is an early work-in-progress and in quite a volatile state.*
 
 ---
 
