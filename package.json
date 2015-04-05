@@ -1,0 +1,28 @@
+{
+  "name": "node-edumate",
+  "version": "1.0.0",
+  "description": "Query your Edumate database with node.js",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neurotech/node-edumate.git"
+  },
+  "keywords": [
+    "edumate"
+  ],
+  "author": "Tim Douglas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neurotech/node-edumate/issues"
+  },
+  "homepage": "https://github.com/neurotech/node-edumate",
+  "dependencies": {
+    "jdbc": "0.0.13"
+  }
+}
