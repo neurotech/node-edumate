@@ -19,7 +19,7 @@ var database = {
 /*
   config
   ------
-  This is the object that edumate.init requires to begin the init operation
+  This is the object that edumate.query requires to begin the query operation.
 */
 var config = {
   libpath: path.join(__dirname, '../drivers/db2jcc.jar'),

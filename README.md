@@ -10,7 +10,7 @@ Query your Edumate database with node.js
 
 ## Configuration
 
-`edumate.init` expects a configuration object that matches this structure:
+`edumate.query` expects a configuration object that matches this structure:
 
 ```javascript
   {
