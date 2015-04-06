@@ -35,31 +35,12 @@ var config = {
 var sql = 'SELECT * FROM table_name';
 
 /*
-  edumate.init()
+  edumate.query()
   --------------
-  Begin the 'query' promise chain
+  Query your Edumate database with the given SQL and configuration object, then log the results to console.
 */
-edumate.init(config)
-  .then(function(response) {
-    console.log('Init: ' + response);
-    edumate.open()
-      .then(function(response) {
-        console.log('Connect: ' + response);
-        edumate.query(sql)
-          .then(function(response) {
-            console.log('Query results: \n' + JSON.stringify(response));
-            edumate.close()
-              .then(function(response) {
-                console.log('Disconnect: ' + response);
-              }, function(error) {
-                console.log('Disconnect error: ' + error);
-              });
-          }, function(error) {
-            console.log('Query error: ' + error);
-          });
-      }, function(error) {
-        console.log('Connect error: ' + error);
-      });
-  }, function(error) {
-    console.log('Init error: ' + error);
-  });
+edumate.query(sql, config).then(function(results) {
+  console.log(results);
+}, function(error) {
+  console.error(error);
+});
