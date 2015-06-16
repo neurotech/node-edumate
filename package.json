@@ -28,6 +28,8 @@
   },
   "homepage": "https://github.com/neurotech/node-edumate",
   "dependencies": {
-    "jdbc": "0.0.13"
+    "camel-case": "1.1.2",
+    "jdbc": "0.0.13",
+    "lodash": "3.9.3"
   }
 }
