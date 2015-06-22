@@ -39,7 +39,7 @@ var sql = 'SELECT * FROM table_name';
   --------------
   Query your Edumate database with the given SQL and configuration object, then log the results to console.
 */
-edumate.query(sql, config).then(function(results) {
+edumate.query(sql, config, {clean: true}).then(function(results) {
   console.log(results);
 }, function(error) {
   console.error(error);
