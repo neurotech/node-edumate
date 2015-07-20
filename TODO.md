@@ -4,3 +4,4 @@
  - Finalise examples/query.js
  - Drivers?
  - Update README with better documentation
+ - Travis
