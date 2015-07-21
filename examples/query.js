@@ -9,11 +9,11 @@ var edumate = require('../lib/edumate');
   Basic database connection, credentials
 */
 var database = {
-  host: 'HOST',
-  port: 'PORT',
-  suffix: '/PATH',
-  username: 'USERNAME',
-  password: 'SECRET'
+  host: 'HOST' || process.env.EDUMATE_HOST,
+  port: 'PORT' || process.env.EDUMATE_PORT,
+  suffix: '/PATH' || process.env.EDUMATE_PATH,
+  username: 'USERNAME' || process.env.EDUMATE_USERNAME,
+  password: 'SECRET' || process.env.EDUMATE_PASSWORD
 };
 
 /*
@@ -37,10 +37,11 @@ var sql = 'SELECT * FROM table_name';
 /*
   edumate.query()
   --------------
-  Query your Edumate database with the given SQL and configuration object, then log the results to console.
+  Query your Edumate database with the given configuration object and SQL, then log the results to console.
 */
-edumate.query(sql, config, {clean: true}).then(function(results) {
-  console.log(results);
-}, function(error) {
-  console.error(error);
-});
+edumate.query(config, sql, {clean: true})
+  .then(function (results) {
+    console.log(results);
+  }, function (error) {
+    console.error(error);
+  });
