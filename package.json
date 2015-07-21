@@ -7,7 +7,7 @@
     "example": "examples"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tap-prettify tests/*.js"
   },
   "repository": {
     "type": "git",
@@ -30,5 +30,9 @@
   "dependencies": {
     "camel-case": "1.1.2",
     "jdbc": "0.0.13"
+  },
+  "devDependencies": {
+    "tap-prettify": "0.0.2",
+    "tape": "^4.0.1"
   }
 }
