@@ -9,11 +9,11 @@ var edumate = require('../lib/edumate');
   Basic database connection, credentials
 */
 var database = {
-  host: 'HOST' || process.env.EDUMATE_HOST,
-  port: 'PORT' || process.env.EDUMATE_PORT,
-  suffix: '/PATH' || process.env.EDUMATE_PATH,
-  username: 'USERNAME' || process.env.EDUMATE_USERNAME,
-  password: 'SECRET' || process.env.EDUMATE_PASSWORD
+  host: process.env.EDUMATE_HOST,
+  port: process.env.EDUMATE_PORT,
+  suffix: process.env.EDUMATE_PATH,
+  username: process.env.EDUMATE_USERNAME,
+  password: process.env.EDUMATE_PASSWORD
 };
 
 /*
@@ -27,6 +27,7 @@ var config = {
   url: 'jdbc:' + 'db2://' + database.host + ':' + database.port + database.suffix + ':user=' + database.username + ';password=' + database.password + ';'
 };
 
+console.log(config.url);
 /*
   sql
   ---
