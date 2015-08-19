@@ -27,7 +27,6 @@ var config = {
   url: 'jdbc:' + 'db2://' + database.host + ':' + database.port + database.suffix + ':user=' + database.username + ';password=' + database.password + ';'
 };
 
-console.log(config.url);
 /*
   sql
   ---
