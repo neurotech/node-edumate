@@ -8,10 +8,14 @@ Query your Edumate database with node.js
 
 `npm install node-edumate --save`
 
-## DB2 Driver
-`node-edumate` makes use of the `node-jdbc` module: [https://github.com/CraZySacX/node-jdbc](https://github.com/CraZySacX/node-jdbc). This means that you will need to supply the DB2 driver JAR file to successfully initialize, connect to, and query Edumate's DB2 database. There is one provided in `./drivers` but you may wish to supply your own.
+## `ibm_db` and OS X
+`node-edumate` makes use of the `ibm_db` module: [https://github.com/ibmdb/node-ibm_db](https://github.com/ibmdb/node-ibm_db).
 
-For more information: [http://www-01.ibm.com/support/docview.wss?uid=swg21363866](http://www-01.ibm.com/support/docview.wss?uid=swg21363866)
+If you are using `node-edumate` on OS X, you need to set the `DYLD_LIBRARY_PATH` using the following command:
+
+```bash
+export DYLD_LIBRARY_PATH=node_modules/ibm_db/installer/clidriver/lib/icc
+```
 
 ## Configuration
 
@@ -19,10 +23,22 @@ For more information: [http://www-01.ibm.com/support/docview.wss?uid=swg21363866
 
 ```javascript
   {
-    libpath: 'PATH/TO/DB2 Driver JAR',
-    drivername: 'com.ibm.db2.jcc.DB2Driver',
-    url: 'jdbc:' + 'db2://' + 'HOSTNAME' + ':' + 'PORT' + '/PATH' + ':user=' + 'USERNAME' + ';password=' + 'SECRET' + ';'
+    host: HOST,
+    port: 12345,
+    suffix: DATABASE,
+    username: USERNAME,
+    password: SECRET
   }
+```
+
+It is recommended to store these items as environment variables. For example:
+
+```bash
+export EDUMATE_HOST=value
+export EDUMATE_PORT=value
+export EDUMATE_PATH=value
+export EDUMATE_USERNAME=value
+export EDUMATE_PASSWORD=value
 ```
 
 ## Usage
@@ -48,3 +64,9 @@ Tests can be run with `npm test` in the module's directory.
 If you haven't set your environment variables yet, you can run the tests by supplying them via the command line:
 
 `EDUMATE_HOST=value EDUMATE_PORT=value EDUMATE_PATH=value EDUMATE_USERNAME=value EDUMATE_PASSWORD=value npm test`
+
+---
+
+## < 4.0.0 API
+
+Legacy API docs available [here](https://github.com/neurotech/node-edumate/blob/master/LEGACY.md).
