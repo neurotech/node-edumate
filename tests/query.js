@@ -5,7 +5,7 @@ var camelCase = require('camel-case');
 var path = require('path');
 var edumate = require('../lib/edumate');
 
-var database = {
+var config = {
   host: process.env.EDUMATE_HOST,
   port: process.env.EDUMATE_PORT,
   suffix: process.env.EDUMATE_PATH,
@@ -13,21 +13,15 @@ var database = {
   password: process.env.EDUMATE_PASSWORD
 };
 
-var config = {
-  libpath: path.join(__dirname, '../drivers/db2jcc.jar'),
-  drivername: 'com.ibm.db2.jcc.DB2Driver',
-  url: 'jdbc:' + 'db2://' + database.host + ':' + database.port + database.suffix + ':user=' + database.username + ';password=' + database.password + ';'
-};
-
 var sql = 'SELECT * FROM EDUMATE.academic_year WHERE academic_year = YEAR(current date)';
 
 test('node-edumate - query - config object + sql statment validity', function (t) {
   t.plan(6);
-  t.equal(typeof database.host, 'string', 'db2 host present');
-  t.equal(typeof database.port, 'string', 'db2 port present');
-  t.equal(typeof database.suffix, 'string', 'db2 path present');
-  t.equal(typeof database.username, 'string', 'db2 username present');
-  t.equal(typeof database.password, 'string', 'db2 password present');
+  t.equal(typeof config.host, 'string', 'db2 host present');
+  t.equal(typeof config.port, 'string', 'db2 port present');
+  t.equal(typeof config.suffix, 'string', 'db2 path present');
+  t.equal(typeof config.username, 'string', 'db2 username present');
+  t.equal(typeof config.password, 'string', 'db2 password present');
   t.equal(typeof sql, 'string', 'sql statment present');
 });
 
