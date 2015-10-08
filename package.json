@@ -35,6 +35,6 @@
     "ibm_db": "git+https://git@github.com/ibmdb/node-ibm_db.git#6d92a833850071ad42273b9b61000bec5dc50a70"
   },
   "devDependencies": {
-    "tape": "^4.0.1"
+    "tape": "4.2.1"
   }
 }
