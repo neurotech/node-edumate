@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "camel-case": "1.1.2",
-    "ibm_db": "git+https://git@github.com/ibmdb/node-ibm_db.git#6d92a833850071ad42273b9b61000bec5dc50a70"
+    "ibm_db": "git+https://git@github.com/neurotech/node-ibm_db.git#v4_support"
   },
   "devDependencies": {
     "tape": "4.2.1"
