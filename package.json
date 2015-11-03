@@ -7,7 +7,7 @@
     "example": "examples"
   },
   "scripts": {
-    "test": "DYLD_LIBRARY_PATH=node_modules/ibm_db/installer/clidriver/lib/icc node tests/query.js"
+    "test": "node tests/query.js"
   },
   "repository": {
     "type": "git",
