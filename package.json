@@ -35,6 +35,7 @@
     "ibm_db": "0.0.19"
   },
   "devDependencies": {
+    "semistandard": "7.0.5",
     "tape": "4.2.1"
   }
 }
