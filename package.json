@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "camel-case": "1.1.2",
-    "ibm_db": "0.0.19"
+    "ibm_db": "1.0.0"
   },
   "devDependencies": {
     "semistandard": "7.0.5",
