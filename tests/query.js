@@ -11,13 +11,8 @@ let config = {
 };
 
 let sql = 'SELECT * FROM EDUMATE.academic_year WHERE academic_year = YEAR(current date)';
-let many = [
-  'SELECT \'Example query results 1.\' AS "CAMEL_CASE_COLUMN" FROM SYSIBM.sysdummy1',
-  'SELECT \'Example query results 2.\' AS "CAMEL_CASE_COLUMN" FROM SYSIBM.sysdummy1',
-  'SELECT \'Example query results 3.\' AS "CAMEL_CASE_COLUMN" FROM SYSIBM.sysdummy1'
-];
 
-test('node-edumate - query - config object + sql statement validity', function (t) {
+test('node-edumate - config object & sql statement validity', function (t) {
   t.plan(6);
   t.equal(typeof config.host, 'string', 'DB2 host present');
   t.equal(typeof config.port, 'string', 'DB2 port present');
@@ -57,7 +52,7 @@ test('node-edumate - close connection to db', function (t) {
 
 test('node-edumate - single query - clean: true', function (t) {
   t.plan(1);
-  edumate.query(config, { clean: true }, sql, (err, results) => {
+  edumate.query(config, sql, { clean: true }, (err, results) => {
     if (err) {
       t.equal(err, null);
     } else {
@@ -69,7 +64,7 @@ test('node-edumate - single query - clean: true', function (t) {
 
 test('node-edumate - single query - clean: false', function (t) {
   t.plan(1);
-  edumate.query(config, { clean: false }, sql, (err, results) => {
+  edumate.query(config, sql, { clean: false }, (err, results) => {
     if (err) {
       t.equal(err, null);
     } else {
@@ -79,8 +74,25 @@ test('node-edumate - single query - clean: false', function (t) {
   });
 });
 
-test('node-edumate - multiple queries', function (t) {
+test('node-edumate - single query - no options', function (t) {
   t.plan(1);
+  edumate.query(config, sql, (err, results) => {
+    if (err) {
+      t.equal(err, null);
+    } else {
+      let firstKey = Object.keys(results[0])[0];
+      t.notEqual(firstKey, camelCase(firstKey), 'first key is *not* camelCase (default behaviour)');
+    }
+  });
+});
+
+test('node-edumate - multiple queries - clean: true', function (t) {
+  t.plan(1);
+  let many = [
+    'SELECT \'Example query results 1.\' AS "CAMEL_CASE_COLUMN" FROM SYSIBM.sysdummy1',
+    'SELECT \'Example query results 2.\' AS "CAMEL_CASE_COLUMN" FROM SYSIBM.sysdummy1',
+    'SELECT \'Example query results 3.\' AS "CAMEL_CASE_COLUMN" FROM SYSIBM.sysdummy1'
+  ];
   edumate.open(config, (err, conn) => {
     if (err) { t.equal(err, null); }
     let goal = many.length;
@@ -88,7 +100,38 @@ test('node-edumate - multiple queries', function (t) {
     let looper = (item) => {
       if (item) {
         setTimeout(() => {
-          edumate.queries({ clean: true }, conn, item, (err, results) => {
+          edumate.queries(conn, item, { clean: true }, (err, results) => {
+            if (err) { t.equal(err, null); }
+            collection.push(results[0]);
+            return looper(many.shift());
+          });
+        }, 500);
+      } else {
+        edumate.close(conn, (err) => {
+          if (err) { t.equal(err, null); }
+          t.equal(collection.length, goal, `${goal} queries executed.`);
+        });
+      }
+    };
+    looper(many.shift());
+  });
+});
+
+test('node-edumate - multiple queries - no options', function (t) {
+  t.plan(1);
+  let many = [
+    'SELECT \'Example query results 1.\' AS "CAMEL_CASE_COLUMN" FROM SYSIBM.sysdummy1',
+    'SELECT \'Example query results 2.\' AS "CAMEL_CASE_COLUMN" FROM SYSIBM.sysdummy1',
+    'SELECT \'Example query results 3.\' AS "CAMEL_CASE_COLUMN" FROM SYSIBM.sysdummy1'
+  ];
+  edumate.open(config, (err, conn) => {
+    if (err) { t.equal(err, null); }
+    let goal = many.length;
+    let collection = [];
+    let looper = (item) => {
+      if (item) {
+        setTimeout(() => {
+          edumate.queries(conn, item, (err, results) => {
             if (err) { t.equal(err, null); }
             collection.push(results[0]);
             return looper(many.shift());
