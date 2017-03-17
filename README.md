@@ -1,21 +1,16 @@
-# node-edumate
+# :mag: node-edumate
 
 Query your Edumate database with node.js
 
----
-
 ## Installation
+
+### Using [npm](https://www.npmjs.com/):
 
 `npm install node-edumate --save`
 
-## `ibm_db` and OS X
-`node-edumate` makes use of the `ibm_db` module: [https://github.com/ibmdb/node-ibm_db](https://github.com/ibmdb/node-ibm_db).
+### Using [Yarn](https://yarnpkg.com/):
 
-If you are using `node-edumate` on OS X, you need to set the `DYLD_LIBRARY_PATH` using the following command:
-
-```bash
-export DYLD_LIBRARY_PATH=node_modules/ibm_db/installer/clidriver/lib/icc
-```
+`yarn add node-edumate`
 
 ## Configuration
 
@@ -43,15 +38,41 @@ export EDUMATE_PASSWORD=value
 
 ## Usage
 
-### edumate.query(config, sql, [options])
+`require` the module in your node.js application and invoke methods accordingly.
 
-Execute the statement supplied via `sql`. Returns an object containing the results of the statement.
+```javascript
+const edumate = require('node-edumate');
+```
+
+### edumate.open(config, callback)
+
+> Connects to your Edumate database using the supplied `config` object. Returns a `conn` object.
+
+### edumate.close(conn, callback)
+
+> Disconnects from the database connection supplied via `conn`.
+
+### edumate.query(config, sql, [options], callback)
+
+> Connects to Edumate's database, executes the statement supplied via `sql`, and then disconnects from the database. Returns an array containing the results of the statement.
 
 `options` must be an object. It can contain any of the following:
 
 | key   | value   | result |
 |-------|---------|--------|
-| `clean` | `boolean` | If true, the keys in the returned object will be converted to camelCase. |
+| `clean` | `boolean` | If true, the keys within the objects in the returned array will be converted to camelCase. |
+
+### edumate.queries(conn, sql, [options], callback)
+
+> Executes the statement supplied via `sql` against the database connection supplied via `conn`.
+
+`options` must be an object. It can contain any of the following:
+
+| key   | value   | result |
+|-------|---------|--------|
+| `clean` | `boolean` | If true, the keys within the objects in the returned array will be converted to camelCase. |
+
+---
 
 ## Examples
 
@@ -59,14 +80,8 @@ Examples reside in _/examples/_.
 
 ## Tests
 
-Tests can be run with `npm test` in the module's directory.
+Tests can be run with `npm test` or `yarn test` in the module's directory.
 
-If you haven't set your environment variables yet, you can run the tests by supplying them via the command line:
+If you haven't set your environment variables yet, you can run the tests by supplying them via the command line, i.e.:
 
 `EDUMATE_HOST=value EDUMATE_PORT=value EDUMATE_PATH=value EDUMATE_USERNAME=value EDUMATE_PASSWORD=value npm test`
-
----
-
-## < 4.0.0 API
-
-Legacy API docs available [here](https://github.com/neurotech/node-edumate/blob/master/LEGACY.md).
