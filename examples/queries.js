@@ -12,12 +12,12 @@ edumate.open(common.config, (err, conn) => {
   let looper = (item) => {
     if (item) {
       setTimeout(() => {
-        edumate.queries(common.options, conn, item, (err, results) => {
+        edumate.queries(conn, item, common.options, (err, results) => {
           if (err) { console.error(err); }
-          console.log(results);
+          console.log(JSON.stringify(results, null, '  '));
           return looper(common.many.shift());
         });
-      }, 1000);
+      }, 500);
     } else {
       edumate.close(conn, (err) => {
         if (err) { console.error(err); }

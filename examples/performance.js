@@ -6,7 +6,7 @@ let performance = {
     console.time('multiple-atomic-queries');
     let looper = (item) => {
       if (item) {
-        edumate.query(common.config, common.options, item, (err, results) => {
+        edumate.query(common.config, item, common.options, (err, results) => {
           if (err) { console.error(err); }
           return looper(common.many.shift());
         });
@@ -23,7 +23,7 @@ let performance = {
       if (err) { console.error(err); }
       let looper = (item) => {
         if (item) {
-          edumate.queries(common.options, conn, item, (err, results) => {
+          edumate.queries(conn, item, common.options, (err, results) => {
             if (err) { console.error(err); }
             return looper(common.many.shift());
           });

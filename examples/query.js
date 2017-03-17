@@ -7,7 +7,7 @@ const common = require('./common');
   Query your Edumate database with the given configuration object and SQL, then log the results to console.
 */
 
-edumate.query(common.config, common.options, common.sql, (err, results) => {
+edumate.query(common.config, common.sql, common.options, (err, results) => {
   if (err) { console.error(err); }
-  console.log(results);
+  console.log(JSON.stringify(results, null, '  '));
 });
